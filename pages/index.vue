@@ -1,14 +1,35 @@
 <script setup>
-const state = reactive({
-    sites: [
-        {
-            title: 'Vue.js',
-            url: 'https://vuejs.org/',
-            results: ['v3.2.33'],
-            lastChecked: '2020-01-01',
-        }
-    ]
-})
+const { data, refresh } = await useAsyncData('sites', () => $fetch('/api/sites'))
+
+const isAdding = ref(false)
+const toggleAdd = () => {
+    isAdding.value = !isAdding.value
+}
+
+const onSubmit = (site) => {
+    const body = {
+        title: site.title,
+        url: site.url,
+        selector: site.selector,
+        actions: [
+            {
+                action: site.action,
+                value: site.value,
+                index: site.index
+            }
+        ]
+    }
+    $fetch('/api/sites', {
+        method: 'POST',
+        body,
+    }).then(() => refresh())
+}
+
+const onCheck = () => {
+    state.sites.forEach(site => {
+        site.results.push('v3.2.33')
+    })
+}
 
 </script>
 
@@ -17,8 +38,9 @@ const state = reactive({
     <header class="w-full h-32 text-center py-5">
         <h1 class="text-4xl"> Version Checker</h1>
     </header>
-    <main>
-        <!-- content here -->
+    <main class="max-w-6xl mx-auto">
+        <SiteForm @submit="onSubmit" @cancel="toggleAdd" class="mb-10" />
+        <SiteTable :sites="data" @add="toggleAdd" @check="onCheck" />
     </main>
 </div>
 </template>
