@@ -1,17 +1,8 @@
-const sites = [
-    {
-        title: 'Vue.js',
-        url: 'https://vuejs.org/',
-        selector : '',
-        actions: [{
-            action: '',
-            value: '',
-            index: 0
-        }],
-        results: [],
-    }
-]
+import { prisma } from './../utils/db';
 
-export default defineEventHandler(() => {
+
+export default defineEventHandler(async () => {
+    const sites = await prisma.site.findMany();
+    console.log(sites, " Here we go");
     return sites
 })

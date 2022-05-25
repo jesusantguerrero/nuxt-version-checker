@@ -1,19 +1,18 @@
-const sites = [
-    {
-        title: 'Vue.js',
-        url: 'https://vuejs.org/',
-        selector : '',
-        actions: [{
-            action: '',
-            value: '',
-            index: 0
-        }],
-        results: [],
-    }
-]
+import { prisma } from "../utils/db"
+import { v4 } from "uuid"
 
 export default defineEventHandler(async (event) => {
-    const body = await useBody(event)
-    sites.push(body)
-    return sites
+    try {
+        const body = await useBody(event)
+        await prisma.site.create({ 
+            data: {
+                id: v4(),
+                ...body
+            }
+        })
+        const sites = await prisma.site.findMany()
+        return sites
+    } catch (err) {
+        return err
+    }
 })

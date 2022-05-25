@@ -16,7 +16,7 @@ const inputClass = "bg-gray-600 px-2 py-1 rounded-md outline-none"
 
 <template>
     <form @submit.prevent="$emit('submit', formData)">
-        <div class="flex flex-col">
+        <div class="flex flex-col rounded-md bg-gray-700 px-5 py-2">
             <div class="flex space-x-2">
                 <label class="w-full">
                     <span class="">Title</span>

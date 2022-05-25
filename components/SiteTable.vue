@@ -17,11 +17,12 @@ defineEmits(['add', 'check'])
             Sites
         </h1>
         <div class="space-x-2 flex justify-end items-center">
-            <button class="bg-gray-600 px-2 py-1 rounded-md">Add</button>
-            <button class="bg-gray-600 px-2 py-1 rounded-md">Check Sites</button>
+            <button class="bg-gray-600 px-2 py-1 rounded-md" @click="$emit('add')">Add</button>
+            <button class="bg-gray-600 px-2 py-1 rounded-md" @click="$emit('check')">Check Sites</button>
         </div>
     </header>
     <section class="bg-gray-600 py-3 px-5 rounded-md mt-5">
+        <slot></slot>
         <div v-for="site in sites" :key="site.title" class="flex justify-between">
             <div class="w-full">{{ site.title }}</div>
             <div class="w-full text-center"> 

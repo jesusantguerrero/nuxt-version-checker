@@ -39,7 +39,7 @@ const onCheck = () => {
         <h1 class="text-4xl"> Version Checker</h1>
     </header>
     <main class="max-w-6xl mx-auto">
-        <SiteForm @submit="onSubmit" @cancel="toggleAdd" class="mb-10" />
+        <SiteForm v-if="isAdding" @submit="onSubmit" @cancel="toggleAdd" class="mb-10 bg-gray-700 rounded-md" />
         <SiteTable :sites="data" @add="toggleAdd" @check="onCheck" />
     </main>
 </div>
