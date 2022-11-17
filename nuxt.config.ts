@@ -4,6 +4,9 @@ export default defineNuxtConfig({
     nitro: {
         preset: "firebase"
     },
+    runtimeConfig: {
+        googleApplicationCredentials: '/path/to/google-credentials'
+    },
     postcss:{
         plugins: {
             tailwindcss: {},
