@@ -1,6 +1,10 @@
-# Nuxt 3 Minimal Starter
+# Nuxt Version Checker
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+The main purpose of this project to provide (to myself) a practical overview the stable version of Nuxt 3 and the new firebase hosting options for frameworks
+
+Why a version checker?
+- To avoid the boring todo app.
+- Provide a whole CRUD, background-jobs use cases.
 
 ## Setup
 
