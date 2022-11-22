@@ -15,3 +15,5 @@ export const useFirebase = (credentialsPath: string) => {
     return getFirestore(firebaseApp);
 }
 
+
+
