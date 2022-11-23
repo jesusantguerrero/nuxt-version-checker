@@ -1,5 +1,5 @@
-import { SiteApi } from './../utils/sitesApi';
-import { useFirebase } from "../utils/firebase";
+import { SiteApi } from '../../utils/sitesApi';
+import { useFirebase } from "../../utils/firebase";
 interface IFeature {
     id: string,
     title: string
