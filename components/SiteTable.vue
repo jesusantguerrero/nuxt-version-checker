@@ -1,33 +1,29 @@
 <script setup lang="ts">
-import { isLiteral } from '@babel/types';
+import { ISite } from "~~/utils/sites";
 
-defineProps({
-    sites: {
-        type: Array
-    }
-})
-
-const emit = defineEmits(['saved'])
-
-
-const onAction = (site) => {
-  console.log(site)
-}
+defineProps<{sites: ISite[]}>()
+const emit = defineEmits(['saved', 'deleted'])
 
 const isAdding = ref(false);
 const toggleAdding = () => {
     isAdding.value = !isAdding.value
 };
+interface ISiteData {
+    id?: string
+    action: string
+    value: string
+    index?:number
+}
 
-const siteData = reactive({
-    id: null,
+const siteData = reactive<ISiteData>({
+    id: undefined,
     action: '',
     value: '',
-    index: ''
+    index: 0
 });
 
 const isLoading = ref(false)
-const onSubmit = async (siteData) => {
+const onSubmit = async (siteData: ISiteData) => {
     if (isLoading.value) return
     isLoading.value = true
     const formData = {
@@ -58,6 +54,15 @@ const onSubmit = async (siteData) => {
         emit('saved', data);
     } finally {
         isLoading.value = false
+    }
+}
+
+const onDelete = async (site: ISite) => {
+    if(confirm(`Delete site ${site.title}?`)) {    
+        fetch(`/api/sites/${site.id}`, { method: 'DELETE'})
+        .then(() => {
+            emit('deleted', site)
+        })
     }
 }
 </script>

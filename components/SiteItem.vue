@@ -1,11 +1,9 @@
-<script setup>
-defineProps({
-    site: {
-        type: Object
-    }
-})
+<script setup lang="ts">
+import { ISite } from '~~/utils/sites';
 
-const formatDate = (value) => {
+defineProps<{site: ISite}>()
+
+const formatDate = (value: String) => {
     return value;
 }
 </script>

@@ -1,9 +1,8 @@
 <script setup lang="ts">
-interface ISite {
-    id: string
-    title: string,
-}
+import { ISite } from '~~/utils/sites';
+
 const { data: sites, refresh } = await useFetch<ISite[]>('/api/sites');
+
 const checkSites = async () => {
     try {
         await fetch('/api/site-check', {
@@ -16,11 +15,11 @@ const checkSites = async () => {
 }
 
 const onDeleted = async (site: ISite) => {
- if(confirm(`Delete site ${site.title}?`) && sites.value) {
-    await fetch(`/api/sites/${site.id}`, { method: 'DELETE'})
-    sites.value = sites.value?.filter(storedSite => storedSite.id != site.id);
- }
+    if (sites.value) {
+        sites.value = sites.value?.filter(storedSite => storedSite.id != site.id);
+    }
 }
+
 </script>
 
 
