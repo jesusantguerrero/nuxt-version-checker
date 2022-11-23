@@ -7,9 +7,8 @@ defineProps({
     }
 })
 
-const onCheck = () => {
-    $emit
-}
+const emit = defineEmits(['saved'])
+
 
 const onAction = (site) => {
   console.log(site)
@@ -56,6 +55,7 @@ const onSubmit = async (siteData) => {
             body: JSON.stringify(formData)
         })
         const data = await response.json()
+        emit('saved', data);
     } finally {
         isLoading.value = false
     }
@@ -83,8 +83,8 @@ const onSubmit = async (siteData) => {
                 v-for="site in sites" 
                 :site="site" 
                 :key="site.id" 
-                @edit="$emit('edit', site.id)"
-                @deleted="$emit('deleted', site.id)"
+                @edit="$emit('edit', site)"
+                @deleted="$emit('deleted', site)"
             />
         </section>
     </div>
