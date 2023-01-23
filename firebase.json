@@ -1,6 +1,7 @@
 {
   "functions": [
     {
+      "runtime": "nodejs16",
       "source": ".output/server",
       "codebase": "default",
       "ignore": [
@@ -16,7 +17,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "source": ".output/public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
